@@ -57,18 +57,18 @@
             >;
         };
 
-        // Layer 1: RGB and Mouse (accessed via S key)
+        // Layer 1: Mouse controls (accessed via S key)
         layer_1 {
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│RGB_TOGG  │RGB_NEXT  │RGB_HUI   │RGB_SAI   │RGB_BRI   │   │RGB_SPD   │ MBTN1    │ MWH_U    │ MBTN2    │          │
-            &trans     &trans     &trans     &trans     &trans         &trans     &mkp LCLK  &mwh SCROLL_UP &mkp RCLK &trans
+        //│          │          │          │          │          │   │          │ LCLK     │ SCR_UP   │ RCLK     │          │
+            &trans     &trans     &trans     &trans     &trans         &trans     &mkp LCLK  &msc SCRL_UP &mkp RCLK &trans
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│          │ MBTN2    │          │ MBTN1    │          │   │ M_LEFT   │ M_DOWN   │ M_UP     │ M_RIGHT  │          │
+        //│          │ RCLK     │          │ LCLK     │          │   │ M_LEFT   │ M_DOWN   │ M_UP     │ M_RIGHT  │          │
             &trans     &mkp RCLK  &none      &mkp LCLK  &trans         &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_UP &mmv MOVE_RIGHT &trans
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│          │RGB_PREV  │RGB_HUD   │RGB_SAD   │RGB_BRD   │   │RGB_SPD-  │ MWH_L    │ MWH_D    │ MWH_R    │          │
-            &trans     &trans     &trans     &trans     &trans         &trans     &mwh SCROLL_LEFT &mwh SCROLL_DOWN &mwh SCROLL_RIGHT &trans
+        //│          │          │          │          │          │   │          │ SCR_LEFT │ SCR_DOWN │ SCR_RIGHT│          │
+            &trans     &trans     &trans     &trans     &trans         &trans     &msc SCRL_LEFT &msc SCRL_DOWN &msc SCRL_RIGHT &trans
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
                                              &trans     &trans         &trans     &trans
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
