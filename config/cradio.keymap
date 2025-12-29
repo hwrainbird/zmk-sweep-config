@@ -1,0 +1,249 @@
+// Copyright (c) 2022 The ZMK Contributors
+// SPDX-License-Identifier: MIT
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/mouse.h>
+
+/ {
+    behaviors {
+        ht: hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <150>;
+            quick-tap-ms = <150>;
+            require-prior-idle-ms = <100>;
+            bindings = <&kp>, <&kp>;
+        };
+    };
+
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+        esc_bspc {
+            if-layers = <2 8>;
+            then-layer = <9>;
+        };
+        bspc_space {
+            if-layers = <8 7>;
+            then-layer = <10>;
+        };
+        space_ret {
+            if-layers = <7 3>;
+            then-layer = <11>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        // Layer 0: Default (Base Colemak-DH)
+        default_layer {
+            bindings = <
+        //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
+        //│GUI+CTL+  │  W       │  F       │  P       │  B       │   │  J       │  L       │  U       │  Y       │  :       │
+        //│  SFT+Q   │          │          │          │          │   │          │          │          │          │          │
+            &mt LG(LC(LSHFT)) Q &kp W &kp F &kp P &kp B            &kp J &kp L &kp U &kp Y &kp COLON
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│ LSFT+A   │  R       │ LT1+S    │  T       │  G       │   │  M       │ LT6+N    │ LT5+E    │ LT4+I    │ RSFT+O   │
+            &mt LSHFT A &kp R    &lt 1 S    &kp T      &kp G          &kp M      &lt 6 N    &lt 5 E    &lt 4 I    &mt RSHFT O
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│  Z       │ LCTL+X   │ LALT+C   │ LGUI+D   │  V       │   │  K       │ LGUI+H   │ LALT+,   │ RCTL+.   │  /       │
+            &kp Z      &mt LCTRL X &mt LALT C &mt LGUI D &kp V       &kp K      &mt LGUI H &mt LALT COMMA &mt RCTRL DOT &kp FSLH
+        //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
+                                            &lt 2 ESC   &lt 8 BSPC    &lt 7 SPACE &lt 3 RET
+        //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
+            >;
+        };
+
+        // Layer 1: RGB and Mouse (accessed via S key)
+        layer_1 {
+            bindings = <
+        //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
+        //│RGB_TOGG  │RGB_NEXT  │RGB_HUI   │RGB_SAI   │RGB_BRI   │   │RGB_SPD   │ MBTN1    │ MWH_U    │ MBTN2    │          │
+            &trans     &trans     &trans     &trans     &trans         &trans     &mkp LCLK  &mwh SCROLL_UP &mkp RCLK &trans
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│          │ MBTN2    │          │ MBTN1    │          │   │ M_LEFT   │ M_DOWN   │ M_UP     │ M_RIGHT  │          │
+            &trans     &mkp RCLK  &none      &mkp LCLK  &trans         &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_UP &mmv MOVE_RIGHT &trans
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│          │RGB_PREV  │RGB_HUD   │RGB_SAD   │RGB_BRD   │   │RGB_SPD-  │ MWH_L    │ MWH_D    │ MWH_R    │          │
+            &trans     &trans     &trans     &trans     &trans         &trans     &mwh SCROLL_LEFT &mwh SCROLL_DOWN &mwh SCROLL_RIGHT &trans
+        //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
+                                             &trans     &trans         &trans     &trans
+        //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
+            >;
+        };
+
+        // Layer 2: Navigation and One-shot modifiers (accessed via ESC key)
+        layer_2 {
+            bindings = <
+        //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
+        //│          │          │ PAGE_UP  │          │          │   │          │          │ UP       │          │          │
+            &trans     &trans     &kp PG_UP  &trans     &trans         &trans     &trans     &kp UP     &trans     &trans
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│ OS_LSFT  │          │          │          │          │   │ LEFT     │ DOWN     │ UP       │ RIGHT    │ RSFT     │
+            &sk LSHFT  &trans     &trans     &trans     &trans         &kp LEFT   &kp DOWN   &kp UP     &kp RIGHT  &kp RSHFT
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│          │ OS_LCTL  │ OS_LALT  │ OS_LGUI  │          │   │          │          │          │ RCTL     │          │
+            &trans     &sk LCTRL  &sk LALT   &sk LGUI   &trans         &trans     &trans     &trans     &kp RCTRL  &trans
+        //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
+                                             &trans     &trans         &trans     &trans
+        //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
+            >;
+        };
+
+        // Layer 3: Symbols (accessed via RET key)
+        layer_3 {
+            bindings = <
+        //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
+        //│          │          │ <        │ >        │          │   │ &        │ _        │ |        │ '        │ $        │
+            &trans     &trans     &kp LT     &kp GT     &trans         &kp AMPS   &kp UNDER  &kp PIPE   &kp SQT    &kp DLLR
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│ LSFT+^   │ *        │ (        │ )        │ %        │   │ £        │ ALT+N    │ /        │ "        │ #        │
+            &mt LSHFT CARET &kp ASTRK &kp LPAR &kp RPAR &kp PRCNT     &kp LA(N3) &kp LA(N)  &kp FSLH   &kp DQT    &kp LS(N3)
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│          │          │ LALT+[   │ LGUI+]   │ !        │   │ %        │ RGUI+-   │ RALT+\   │ RCTL+`   │ @        │
+            &trans     &trans     &mt LALT LBKT &mt LGUI RBKT &kp EXCL  &kp PRCNT &mt RGUI MINUS &mt RALT BSLH &mt RCTRL GRAVE &kp LA(N2)
+        //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
+                                             &trans     &trans         &trans     &trans
+        //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
+            >;
+        };
+
+        // Layer 4: More symbols and media (accessed via I key)
+        layer_4 {
+            bindings = <
+        //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
+        //│          │ :        │ <        │ >        │ ;        │   │ MUTE     │ VOL_DN   │ VOL_UP   │          │          │
+            &trans     &kp COLON  &kp LT     &kp GT     &kp SEMI       &kp C_MUTE &kp C_VOL_DN &kp C_VOL_UP &trans   &trans
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│ LSHIFT   │ }        │ (        │ )        │ @        │   │ RCTL_UP  │ {        │ }        │          │ +        │
+            &kp LSHFT  &kp RBRC   &kp LPAR   &kp RPAR   &kp AT         &kp LC(UP) &kp LBRC   &kp RBRC   &none      &kp PLUS
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│          │ LCTL     │ [        │ ]        │ =        │   │ BRI_DN   │ BRI_UP   │ RALT     │ RCTL     │ /        │
+            &trans     &kp LCTRL  &kp LBKT   &kp RBKT   &kp EQUAL      &kp C_BRI_DN &kp C_BRI_UP &kp RALT &kp RCTRL &kp FSLH
+        //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
+                                             &trans     &trans         &trans     &trans
+        //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
+            >;
+        };
+
+        // Layer 5: Function keys (accessed via E key)
+        layer_5 {
+            bindings = <
+        //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
+        //│          │ F7       │ F8       │ F9       │ F10      │   │          │          │          │          │          │
+            &trans     &kp F7     &kp F8     &kp F9     &kp F10        &trans     &trans     &trans     &trans     &trans
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│          │ F1       │ F2       │ F3       │ F11      │   │          │          │          │          │          │
+            &trans     &kp F1     &kp F2     &kp F3     &kp F11        &trans     &none      &trans     &trans     &trans
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│          │ F4       │ F5       │ F6       │ F12      │   │          │          │          │          │          │
+            &trans     &kp F4     &kp F5     &kp F6     &kp F12        &trans     &trans     &trans     &trans     &trans
+        //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
+                                             &trans     &trans         &trans     &trans
+        //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
+            >;
+        };
+
+        // Layer 6: Number pad (accessed via N key)
+        layer_6 {
+            bindings = <
+        //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
+        //│ /        │ 7        │ 8        │ 9        │ +        │   │          │          │          │          │          │
+            &kp KP_SLASH &kp N7   &kp N8     &kp N9     &kp KP_PLUS    &trans     &trans     &trans     &trans     &trans
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│ 0        │ 1        │ 2        │ 3        │ -        │   │          │          │ LGUI     │          │ RSHIFT   │
+            &kp N0     &kp N1     &kp N2     &kp N3     &kp KP_MINUS   &trans     &none      &kp LGUI   &trans     &kp RSHFT
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│ *        │ 4        │ 5        │ LGUI+6   │ =        │   │          │          │ RALT+,   │ RCTL+.   │          │
+            &kp KP_MULTIPLY &kp N4 &kp N5    &mt LGUI N6 &kp KP_EQUAL  &trans     &trans     &mt RALT COMMA &mt RCTRL DOT &trans
+        //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
+                                             &trans     &trans         &trans     &trans
+        //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
+            >;
+        };
+
+        // Layer 7: Utility (accessed via SPACE key)
+        layer_7 {
+            bindings = <
+        //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
+        //│          │          │ :        │ ESC      │          │   │          │          │          │          │ DEL      │
+            &trans     &trans     &kp COLON  &kp ESC    &trans         &trans     &trans     &trans     &trans     &kp DEL
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│          │ %        │ /        │ ENTER    │          │   │ TO(1)    │ LGUI     │          │          │          │
+            &trans     &kp PRCNT  &kp FSLH   &kp RET    &trans         &to 1      &kp LGUI   &trans     &trans     &trans
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│          │          │          │ !        │          │   │ TO(0)    │          │ ,        │ .        │BOOTLOADER│
+            &trans     &trans     &trans     &kp EXCL   &trans         &to 0      &trans     &kp COMMA  &kp DOT    &bootloader
+        //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
+                                             &trans     &kp TAB        &none      &trans
+        //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
+            >;
+        };
+
+        // Layer 8: MEH combinations (accessed via BSPC key)
+        layer_8 {
+            bindings = <
+        //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
+        //│MEH+Q     │MEH+W     │MEH+F     │MEH+P     │MEH+B     │   │S-G+[     │MEH+L     │MEH+U     │S-G+]     │MEH+;     │
+            &kp LC(LA(LS(Q))) &kp LC(LA(LS(W))) &kp LC(LA(LS(F))) &kp LC(LA(LS(P))) &kp LC(LA(LS(B)))   &kp LS(LG(LBKT)) &kp LC(LA(LS(L))) &kp LC(LA(LS(U))) &kp LS(LG(RBKT)) &kp LC(LA(LS(SEMI)))
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│MEH+A     │MEH+1     │MEH+2     │MEH+3     │MEH+G     │   │MEH+M     │MEH+N     │MEH+E     │MEH+I     │MEH+O     │
+            &kp LC(LA(LS(A))) &kp LC(LA(LS(N1))) &kp LC(LA(LS(N2))) &kp LC(LA(LS(N3))) &kp LC(LA(LS(G)))   &kp LC(LA(LS(M))) &kp LC(LA(LS(N))) &kp LC(LA(LS(E))) &kp LC(LA(LS(I))) &kp LC(LA(LS(O)))
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│MEH+Z     │MEH+4     │MEH+5     │LGUI+MEH+6│MEH+V     │   │MEH+K     │MEH+H     │MEH+,     │MEH+.     │MEH+/     │
+            &kp LC(LA(LS(Z))) &kp LC(LA(LS(N4))) &kp LC(LA(LS(N5))) &mt LGUI LC(LA(LS(N6))) &kp LC(LA(LS(V)))   &kp LC(LA(LS(K))) &kp LC(LA(LS(H))) &kp LC(LA(LS(COMMA))) &kp LC(LA(LS(DOT))) &kp LC(LA(LS(FSLH)))
+        //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
+                                             &trans     &none          &kp LC(LA(LS(SPACE))) &trans
+        //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
+            >;
+        };
+
+        // Layer 9: Conditional ESC + BSPC (layers 2 + 8)
+        layer_9 {
+            bindings = <
+        //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
+            &trans     &trans     &trans     &trans     &trans         &trans     &trans     &trans     &trans     &trans
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+            &trans     &trans     &trans     &trans     &trans         &trans     &trans     &trans     &trans     &trans
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+            &trans     &trans     &trans     &trans     &trans         &trans     &trans     &trans     &trans     &trans
+        //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
+                                             &trans     &trans         &trans     &trans
+        //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
+            >;
+        };
+
+        // Layer 10: Conditional BSPC + SPACE (layers 8 + 7)
+        layer_10 {
+            bindings = <
+        //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
+            &trans     &trans     &trans     &trans     &trans         &trans     &trans     &trans     &trans     &trans
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+            &trans     &trans     &trans     &trans     &trans         &trans     &trans     &trans     &trans     &trans
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+            &trans     &trans     &trans     &trans     &trans         &trans     &trans     &trans     &trans     &trans
+        //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
+                                             &trans     &trans         &trans     &trans
+        //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
+            >;
+        };
+
+        // Layer 11: Conditional SPACE + ENTER (layers 7 + 3)
+        layer_11 {
+            bindings = <
+        //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
+            &trans     &trans     &trans     &trans     &trans         &trans     &trans     &trans     &trans     &trans
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+            &trans     &trans     &trans     &trans     &trans         &trans     &trans     &trans     &trans     &trans
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+            &trans     &trans     &trans     &trans     &trans         &trans     &trans     &trans     &trans     &trans
+        //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
+                                             &trans     &trans         &trans     &trans
+        //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
+            >;
+        };
+    };
+};
