@@ -13,8 +13,8 @@
             label = "MOD_TAP";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <150>;
-            quick-tap-ms = <125>;
+            tapping-term-ms = <120>;
+            quick-tap-ms = <100>;
             require-prior-idle-ms = <0>;
             bindings = <&kp>, <&kp>;
         };
