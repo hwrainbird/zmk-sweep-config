@@ -3,8 +3,6 @@
  * Only the / key (pro_micro 2) can wake this half from soft off.
  */
 
-#include <zephyr/dt-bindings/gpio.h>
-
 /* Remove "any key wakes" from the main kscan */
 &kscan0 {
     /delete-property/ wakeup-source;
