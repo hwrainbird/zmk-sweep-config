@@ -1,0 +1,31 @@
+/*
+ * Right half soft off wakeup configuration.
+ * Only the / key (pro_micro 2) can wake this half from soft off.
+ */
+
+#include <zephyr/dt-bindings/gpio.h>
+
+/* Remove "any key wakes" from the main kscan */
+&kscan0 {
+    /delete-property/ wakeup-source;
+};
+
+/ {
+    keys {
+        compatible = "gpio-keys";
+        soft_off_key: soft_off_key {
+            gpios = <&pro_micro 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        };
+    };
+
+    wakeup_trigger: wakeup_trigger {
+        compatible = "zmk,gpio-key-wakeup-trigger";
+        trigger = <&soft_off_key>;
+        wakeup-source;
+    };
+
+    soft_off_wakers {
+        compatible = "zmk,soft-off-wakeup-sources";
+        wakeup-sources = <&wakeup_trigger>;
+    };
+};
