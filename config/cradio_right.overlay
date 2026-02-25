@@ -1,12 +1,11 @@
 /*
  * Right half soft off wakeup configuration.
  * Only the / key (pro_micro 2) can wake this half from soft off.
+ *
+ * No need to remove wakeup-source from kscan0 — ZMK's soft off code
+ * disables all wakeup sources first, then enables only soft_off_wakers.
+ * The kscan0 wakeup-source still handles idle sleep wake (desired).
  */
-
-/* Remove "any key wakes" from the main kscan */
-&kscan0 {
-    /delete-property/ wakeup-source;
-};
 
 / {
     keys {
