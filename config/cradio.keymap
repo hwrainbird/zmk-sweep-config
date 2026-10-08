@@ -23,8 +23,8 @@
 
     conditional_layers {
         compatible = "zmk,conditional-layers";
-        esc_bspc {
-            if-layers = <2 8>;
+        bspc_ret {
+            if-layers = <8 3>;
             then-layer = <9>;
         };
         bspc_space {
@@ -203,9 +203,11 @@
             >;
         };
 
-        // Layer 9: HYPER combinations (hold ESC + BSPC, either one first)
+        // Layer 9: HYPER combinations (hold BSPC + RET, either one first)
         // Same positions as the MEH layer plus GUI: BSPC+T goes to workspace 3,
-        // ESC+BSPC+T takes the window there. Other keys fall through to MEH.
+        // BSPC+RET+T takes the window there. Other keys fall through to MEH.
+        // One thumb per hand; the right thumb is on RET, so HYPER+V stands in
+        // for HYPER+SPACE (both move the window to the other monitor).
         layer_9 {
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
@@ -218,8 +220,7 @@
         //│          │HYPER+4   │HYPER+5   │HYPER+6   │HYPER+V   │   │          │          │          │          │          │
             &trans     &kp LG(LC(LA(LS(N4)))) &kp LG(LC(LA(LS(N5)))) &kp LG(LC(LA(LS(N6)))) &kp LG(LC(LA(LS(V))))   &trans     &trans     &trans     &trans     &trans
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-        //                                 │          │          │   │HYPER+SPC │          │
-                                             &trans     &trans         &kp LG(LC(LA(LS(SPACE)))) &trans
+                                             &trans     &trans         &trans     &trans
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
             >;
         };
