@@ -159,8 +159,8 @@
         //│ 0        │ 1        │ 2        │ 3        │ -        │   │          │          │ LGUI     │          │ RSHIFT   │
             &kp N0     &kp N1     &kp N2     &kp N3     &kp KP_MINUS   &trans     &none      &kp LGUI   &trans     &kp RSHFT
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│ *        │ 4        │ 5        │ LGUI+6   │ =        │   │          │          │ RALT+,   │ RCTL+.   │          │
-            &kp KP_MULTIPLY &kp N4 &kp N5    &mt LGUI N6 &kp KP_EQUAL  &trans     &trans     &mt RALT COMMA &mt RCTRL DOT &trans
+        //│ *        │ 4        │ 5        │ 6        │ =        │   │          │          │ RALT+,   │ RCTL+.   │          │
+            &kp KP_MULTIPLY &kp N4 &kp N5    &kp N6      &kp KP_EQUAL  &trans     &trans     &mt RALT COMMA &mt RCTRL DOT &trans
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
                                              &trans     &trans         &trans     &trans
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
@@ -195,8 +195,8 @@
         //│MEH+A     │MEH+1     │MEH+2     │MEH+3     │MEH+G     │   │MEH+M     │MEH+N     │MEH+E     │MEH+I     │MEH+O     │
             &kp LC(LA(LS(A))) &kp LC(LA(LS(N1))) &kp LC(LA(LS(N2))) &kp LC(LA(LS(N3))) &kp LC(LA(LS(G)))   &kp LC(LA(LS(M))) &kp LC(LA(LS(N))) &kp LC(LA(LS(E))) &kp LC(LA(LS(I))) &kp LC(LA(LS(O)))
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│MEH+Z     │MEH+4     │MEH+5     │LGUI+MEH+6│MEH+V     │   │MEH+K     │MEH+H     │MEH+,     │MEH+.     │MEH+/     │
-            &kp LC(LA(LS(Z))) &kp LC(LA(LS(N4))) &kp LC(LA(LS(N5))) &mt LGUI LC(LA(LS(N6))) &kp LC(LA(LS(V)))   &kp LC(LA(LS(K))) &kp LC(LA(LS(H))) &kp LC(LA(LS(COMMA))) &kp LC(LA(LS(DOT))) &kp LC(LA(LS(FSLH)))
+        //│MEH+Z     │MEH+4     │MEH+5     │MEH+6     │MEH+V     │   │MEH+K     │MEH+H     │MEH+,     │MEH+.     │MEH+/     │
+            &kp LC(LA(LS(Z))) &kp LC(LA(LS(N4))) &kp LC(LA(LS(N5))) &kp LC(LA(LS(N6)))      &kp LC(LA(LS(V)))   &kp LC(LA(LS(K))) &kp LC(LA(LS(H))) &kp LC(LA(LS(COMMA))) &kp LC(LA(LS(DOT))) &kp LC(LA(LS(FSLH)))
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
                                              &trans     &none          &kp LC(LA(LS(SPACE))) &trans
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
