@@ -203,17 +203,23 @@
             >;
         };
 
-        // Layer 9: Conditional ESC + BSPC (layers 2 + 8)
+        // Layer 9: HYPER combinations (hold ESC + BSPC, either one first)
+        // Same positions as the MEH layer plus GUI: BSPC+T goes to workspace 3,
+        // ESC+BSPC+T takes the window there. Other keys fall through to MEH.
         layer_9 {
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-            &trans     &trans     &trans     &trans     &trans         &trans     &trans     &trans     &trans     &trans
+        //│          │          │          │HYPER+P   │HYPER+B   │   │          │          │HYPER+U   │          │          │
+            &trans     &trans     &trans     &kp LG(LC(LA(LS(P)))) &kp LG(LC(LA(LS(B))))   &trans     &trans     &kp LG(LC(LA(LS(U)))) &trans     &trans
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-            &trans     &trans     &trans     &trans     &trans         &trans     &trans     &trans     &trans     &trans
+        //│          │HYPER+1   │HYPER+2   │HYPER+3   │          │   │          │          │          │          │          │
+            &trans     &kp LG(LC(LA(LS(N1)))) &kp LG(LC(LA(LS(N2)))) &kp LG(LC(LA(LS(N3)))) &trans   &trans     &trans     &trans     &trans     &trans
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-            &trans     &trans     &trans     &trans     &trans         &trans     &trans     &trans     &trans     &trans
+        //│          │HYPER+4   │HYPER+5   │HYPER+6   │HYPER+V   │   │          │          │          │          │          │
+            &trans     &kp LG(LC(LA(LS(N4)))) &kp LG(LC(LA(LS(N5)))) &kp LG(LC(LA(LS(N6)))) &kp LG(LC(LA(LS(V))))   &trans     &trans     &trans     &trans     &trans
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                             &trans     &trans         &trans     &trans
+        //                                 │          │          │   │HYPER+SPC │          │
+                                             &trans     &trans         &kp LG(LC(LA(LS(SPACE)))) &trans
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
             >;
         };
