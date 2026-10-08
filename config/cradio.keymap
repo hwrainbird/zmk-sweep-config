@@ -102,11 +102,11 @@
         //│          │          │ <        │ >        │          │   │ &        │ _        │ |        │ '        │ $        │
             &trans     &trans     &kp LT     &kp GT     &trans         &kp AMPS   &kp UNDER  &kp PIPE   &kp SQT    &kp DLLR
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│ LSFT+^   │ *        │ (        │ )        │ %        │   │ £        │ ALT+N    │ /        │ "        │ #        │
-            &mt LSHFT CARET &kp ASTRK &kp LPAR &kp RPAR &kp PRCNT     &kp LA(N3) &kp LA(N)  &kp FSLH   &kp DQT    &kp LS(N3)
+        //│ LSFT+^   │ *        │ (        │ )        │ %        │   │ £        │ RALT+N   │ /        │ "        │ #        │
+            &mt LSHFT CARET &kp ASTRK &kp LPAR &kp RPAR &kp PRCNT     &kp RA(N3) &kp RA(N)  &kp FSLH   &kp DQT    &kp LS(N3)
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│          │          │ LALT+[   │ LGUI+]   │ !        │   │ %        │ RGUI+-   │ RALT+\   │ RCTL+`   │ @        │
-            &trans     &trans     &mt LALT LBKT &mt LGUI RBKT &kp EXCL  &kp PRCNT &mt RGUI MINUS &mt RALT BSLH &mt RCTRL GRAVE &kp LA(N2)
+            &trans     &trans     &mt LALT LBKT &mt LGUI RBKT &kp EXCL  &kp PRCNT &mt RGUI MINUS &mt RALT BSLH &mt RCTRL GRAVE &kp RA(N2)
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
                                              &trans     &trans         &trans     &trans
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
