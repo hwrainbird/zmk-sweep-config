@@ -174,8 +174,8 @@
         layer_7 {
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│          │          │ :        │ ESC      │          │   │          │          │          │          │ DEL      │
-            &trans     &trans     &kp COLON  &kp ESC    &trans         &trans     &trans     &trans     &trans     &kp DEL
+        //│BOOTLOADER│          │ :        │ ESC      │          │   │          │          │          │          │ DEL      │
+            &bootloader &trans    &kp COLON  &kp ESC    &trans         &trans     &trans     &trans     &trans     &kp DEL
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│          │ %        │ /        │ ENTER    │          │   │ TO(1)    │ LGUI     │          │          │          │
             &trans     &kp PRCNT  &kp FSLH   &kp RET    &trans         &to 1      &kp LGUI   &trans     &trans     &trans
