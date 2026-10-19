@@ -11,13 +11,17 @@
 
 / {
     behaviors {
+        // Balanced: a mod-tap becomes its modifier once another key goes down
+        // and back up while it's held, however quick. Pressed alone it waits
+        // 200ms, well above the slowest a/o taps hrm-tune measured (~140ms).
+        // Keep a/o down until the capital letter is back up.
         mt: mod_tap {
             compatible = "zmk,behavior-hold-tap";
             label = "MOD_TAP";
             #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <120>;
-            quick-tap-ms = <100>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <175>;
             require-prior-idle-ms = <0>;
             bindings = <&kp>, <&kp>;
         };
