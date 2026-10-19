@@ -208,14 +208,18 @@
         // BSPC+RET+T takes the window there. Other keys fall through to MEH.
         // One thumb per hand; the right thumb is on RET, so HYPER+V stands in
         // for HYPER+SPACE (both move the window to the other monitor).
+        // BSPC+MNEI focuses a window, BSPC+RET+MNEI moves it that way.
+        // BSPC+J/Y switch tabs in an app, BSPC+RET+J/Y the windows in a group.
+        // F and L take Omarchy's SUPER+F (full screen) and SUPER+L (layout),
+        // which give way to ⌘F and ⌘L in apps.
         layer_9 {
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│          │          │          │HYPER+P   │HYPER+B   │   │          │          │HYPER+U   │          │          │
-            &trans     &trans     &trans     &kp LG(LC(LA(LS(P)))) &kp LG(LC(LA(LS(B))))   &trans     &trans     &kp LG(LC(LA(LS(U)))) &trans     &trans
+        //│          │          │HYPER+F   │HYPER+P   │HYPER+B   │   │HYPER+J   │HYPER+L   │HYPER+U   │HYPER+Y   │          │
+            &trans     &trans     &kp LG(LC(LA(LS(F)))) &kp LG(LC(LA(LS(P)))) &kp LG(LC(LA(LS(B))))   &kp LG(LC(LA(LS(J)))) &kp LG(LC(LA(LS(L)))) &kp LG(LC(LA(LS(U)))) &kp LG(LC(LA(LS(Y)))) &trans
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│          │HYPER+1   │HYPER+2   │HYPER+3   │          │   │          │          │          │          │          │
-            &trans     &kp LG(LC(LA(LS(N1)))) &kp LG(LC(LA(LS(N2)))) &kp LG(LC(LA(LS(N3)))) &trans   &trans     &trans     &trans     &trans     &trans
+        //│          │HYPER+1   │HYPER+2   │HYPER+3   │          │   │HYPER+M   │HYPER+N   │HYPER+E   │HYPER+I   │          │
+            &trans     &kp LG(LC(LA(LS(N1)))) &kp LG(LC(LA(LS(N2)))) &kp LG(LC(LA(LS(N3)))) &trans   &kp LG(LC(LA(LS(M)))) &kp LG(LC(LA(LS(N)))) &kp LG(LC(LA(LS(E)))) &kp LG(LC(LA(LS(I)))) &trans
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│          │HYPER+4   │HYPER+5   │HYPER+6   │HYPER+V   │   │          │          │          │          │          │
             &trans     &kp LG(LC(LA(LS(N4)))) &kp LG(LC(LA(LS(N5)))) &kp LG(LC(LA(LS(N6)))) &kp LG(LC(LA(LS(V))))   &trans     &trans     &trans     &trans     &trans
