@@ -6,6 +6,9 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/pointing.h>
 
+// Index of the RAW typing-test layer (the last layer below).
+#define RAW 12
+
 / {
     behaviors {
         mt: mod_tap {
@@ -177,8 +180,8 @@
         //│          │ %        │ /        │ ENTER    │          │   │ TO(1)    │ LGUI     │          │          │          │
             &trans     &kp PRCNT  &kp FSLH   &kp RET    &trans         &to 1      &kp LGUI   &trans     &trans     &trans
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│          │          │          │ !        │          │   │ TO(0)    │          │ ,        │ .        │BOOTLOADER│
-            &trans     &trans     &trans     &kp EXCL   &trans         &to 0      &trans     &kp COMMA  &kp DOT    &bootloader
+        //│ RAW TEST │          │          │ !        │          │   │ TO(0)    │          │ ,        │ .        │BOOTLOADER│
+            &tog RAW   &trans     &trans     &kp EXCL   &trans         &to 0      &trans     &kp COMMA  &kp DOT    &bootloader
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
                                              &trans     &kp TAB        &none      &trans
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
@@ -255,6 +258,27 @@
             &trans     &trans     &trans     &trans     &trans         &trans     &trans     &trans     &trans     &trans
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
                                              &trans     &trans         &trans     &trans
+        //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
+            >;
+        };
+
+        // Layer 12: RAW typing test (Space+Z turns it on, the Esc thumb turns it off)
+        // Every hold-tap becomes a plain key, so hrm-tune (~/src/hrm-tune) can
+        // measure how long you really hold each one. No mods or layers in here.
+        raw_layer {
+            bindings = <
+        //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
+        //│  Q       │          │          │          │          │   │          │          │          │          │          │
+            &kp Q      &trans     &trans     &trans     &trans         &trans     &trans     &trans     &trans     &trans
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│  A       │          │  S       │          │          │   │          │  N       │  E       │  I       │  O       │
+            &kp A      &trans     &kp S      &trans     &trans         &trans     &kp N      &kp E      &kp I      &kp O
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│          │  X       │  C       │  D       │          │   │          │  H       │  ,       │  .       │          │
+            &trans     &kp X      &kp C      &kp D      &trans         &trans     &kp H      &kp COMMA  &kp DOT    &trans
+        //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
+        //                                 │ RAW OFF  │  BSPC    │   │  SPACE   │  RET     │
+                                             &tog RAW   &kp BSPC       &kp SPACE  &kp RET
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
             >;
         };
