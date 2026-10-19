@@ -9,6 +9,12 @@
 // Index of the RAW typing-test layer (the last layer below).
 #define RAW 12
 
+// Tap a layer-tap key, then press and hold it within 175ms, and it repeats
+// (eeee, or Backspace) instead of switching layer. Same window as mt.
+&lt {
+    quick-tap-ms = <175>;
+};
+
 / {
     behaviors {
         // Balanced: a mod-tap becomes its modifier once another key goes down
