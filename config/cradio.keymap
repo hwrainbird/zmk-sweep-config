@@ -7,7 +7,7 @@
 #include <dt-bindings/zmk/pointing.h>
 
 // Indexes of the last layers below.
-#define RAW 12
+#define MEDIA 12
 #define CLEANSHOT 13
 
 // Tap a layer-tap key, then press and hold it within 175ms, and it repeats
@@ -52,6 +52,10 @@
         esc_space {
             if-layers = <2 7>;
             then-layer = <CLEANSHOT>;
+        };
+        esc_ret {
+            if-layers = <2 3>;
+            then-layer = <MEDIA>;
         };
     };
 
@@ -203,8 +207,8 @@
         //│          │ %        │ /        │ ENTER    │          │   │ TO(1)    │ LGUI     │          │          │          │
             &trans     &kp PRCNT  &kp FSLH   &kp RET    &trans         &to 1      &kp LGUI   &trans     &trans     &trans
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│ RAW TEST │          │          │ !        │          │   │ TO(0)    │          │ ,        │ .        │BOOTLOADER│
-            &tog RAW   &trans     &trans     &kp EXCL   &trans         &to 0      &trans     &kp COMMA  &kp DOT    &bootloader
+        //│          │          │          │ !        │          │   │ TO(0)    │          │ ,        │ .        │BOOTLOADER│
+            &trans     &trans     &trans     &kp EXCL   &trans         &to 0      &trans     &kp COMMA  &kp DOT    &bootloader
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
                                              &trans     &kp TAB        &none      &trans
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
@@ -289,24 +293,27 @@
             >;
         };
 
-        // Layer 12: RAW typing test (Space+Z turns it on, the Esc thumb turns it off)
-        // Every hold-tap becomes a plain key, so hrm-tune (~/src/hrm-tune) can
-        // measure how long you really hold each one. No mods or layers in here.
-        raw_layer {
-            display-name = "RAW";
+        // Layer 12: Media (hold ESC + RET, either one first)
+        // A Mac's top row. M N E I are left/down/up/right as everywhere else:
+        // previous track, volume down, volume up, next track. Brightness sits
+        // above the volume keys, mute and play/pause below them, and Y is
+        // Mission Control. Everything else is blocked, so nothing falls
+        // through to the Nav or Symbols layer the thumbs are holding.
+        media_layer {
+            display-name = "Media";
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│  Q       │          │          │          │          │   │          │          │          │          │          │
-            &kp Q      &trans     &trans     &trans     &trans         &trans     &trans     &trans     &trans     &trans
+        //│          │          │          │          │          │   │          │ BRI_DN   │ BRI_UP   │ MISSION  │          │
+            &none      &none      &none      &none      &none          &none      &kp C_BRI_DN &kp C_BRI_UP &kp LC(UP) &none
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│  A       │          │  S       │          │          │   │          │  N       │  E       │  I       │  O       │
-            &kp A      &trans     &kp S      &trans     &trans         &trans     &kp N      &kp E      &kp I      &kp O
+        //│          │          │          │          │          │   │ PREV     │ VOL_DN   │ VOL_UP   │ NEXT     │          │
+            &none      &none      &none      &none      &none          &kp C_PREV &kp C_VOL_DN &kp C_VOL_UP &kp C_NEXT &none
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│          │  X       │  C       │  D       │          │   │          │  H       │  ,       │  .       │          │
-            &trans     &kp X      &kp C      &kp D      &trans         &trans     &kp H      &kp COMMA  &kp DOT    &trans
+        //│          │          │          │          │          │   │          │ MUTE     │ PLAY     │          │          │
+            &none      &none      &none      &none      &none          &none      &kp C_MUTE &kp C_PP   &none      &none
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-        //                                 │ RAW OFF  │  BSPC    │   │  SPACE   │  RET     │
-                                             &tog RAW   &kp BSPC       &kp SPACE  &kp RET
+        //                                 │ (held)   │          │   │          │ (held)   │
+                                             &trans     &none          &none      &trans
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
             >;
         };
