@@ -60,6 +60,7 @@
 
         // Layer 0: Default (Base Colemak-DH)
         default_layer {
+            display-name = "Base";
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│GUI+CTL+  │  W       │  F       │  P       │  B       │   │  J       │  L       │  U       │  Y       │  :       │
@@ -79,6 +80,7 @@
 
         // Layer 1: Mouse controls (accessed via S key)
         layer_1 {
+            display-name = "Mouse";
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│          │          │          │          │          │   │          │ LCLK     │ SCR_UP   │ RCLK     │          │
@@ -97,6 +99,7 @@
 
         // Layer 2: Navigation and One-shot modifiers (accessed via ESC key)
         layer_2 {
+            display-name = "Nav";
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│          │          │ PAGE_UP  │          │          │   │          │          │ UP       │          │          │
@@ -115,6 +118,7 @@
 
         // Layer 3: Symbols (accessed via RET key)
         layer_3 {
+            display-name = "Symbols";
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│          │          │ <        │ >        │          │   │ &        │ _        │ |        │ '        │ $        │
@@ -133,6 +137,7 @@
 
         // Layer 4: More symbols and media (accessed via I key)
         layer_4 {
+            display-name = "Sym 2";
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│          │ :        │ <        │ >        │ ;        │   │ MUTE     │ VOL_DN   │ VOL_UP   │          │          │
@@ -151,6 +156,7 @@
 
         // Layer 5: Function keys (accessed via E key)
         layer_5 {
+            display-name = "F-keys";
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│          │ F7       │ F8       │ F9       │ F10      │   │          │          │          │          │          │
@@ -169,6 +175,7 @@
 
         // Layer 6: Number pad (accessed via N key)
         layer_6 {
+            display-name = "Numbers";
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│ /        │ 7        │ 8        │ 9        │ +        │   │          │          │          │          │          │
@@ -187,6 +194,7 @@
 
         // Layer 7: Utility (accessed via SPACE key)
         layer_7 {
+            display-name = "Utility";
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│BOOTLOADER│          │ :        │ ESC      │          │   │          │          │          │          │ DEL      │
@@ -205,6 +213,7 @@
 
         // Layer 8: MEH combinations (accessed via BSPC key)
         layer_8 {
+            display-name = "MEH";
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│MEH+Q     │MEH+W     │MEH+F     │MEH+P     │MEH+B     │   │S-G+[     │MEH+L     │MEH+U     │S-G+]     │MEH+;     │
@@ -231,6 +240,7 @@
         // F and L take Omarchy's SUPER+F (full screen) and SUPER+L (layout),
         // which give way to ⌘F and ⌘L in apps.
         layer_9 {
+            display-name = "HYPER";
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│          │          │HYPER+F   │HYPER+P   │HYPER+B   │   │HYPER+J   │HYPER+L   │HYPER+U   │HYPER+Y   │          │
@@ -249,6 +259,7 @@
 
         // Layer 10: Conditional BSPC + SPACE (layers 8 + 7)
         layer_10 {
+            display-name = "Bspc+Space";
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
             &trans     &trans     &trans     &trans     &trans         &trans     &trans     &trans     &trans     &trans
@@ -264,6 +275,7 @@
 
         // Layer 11: Conditional SPACE + ENTER (layers 7 + 3)
         layer_11 {
+            display-name = "Space+Ret";
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
             &trans     &trans     &trans     &trans     &trans         &trans     &trans     &trans     &trans     &trans
@@ -281,6 +293,7 @@
         // Every hold-tap becomes a plain key, so hrm-tune (~/src/hrm-tune) can
         // measure how long you really hold each one. No mods or layers in here.
         raw_layer {
+            display-name = "RAW";
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│  Q       │          │          │          │          │   │          │          │          │          │          │
@@ -306,6 +319,7 @@
         // T text (OCR), R record screen, D desktop icons, H history.
         // Everything else is blocked so nothing falls through to layer 7.
         cleanshot_layer {
+            display-name = "Screenshots";
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│ ⌃⌥⌘ Q    │ ⌃⌥⌘ W    │ ⌃⌥⌘ F    │ ⌃⌥⌘ P    │ ⌃⌥⌘ B    │   │ ⌃⌥⌘ J    │ ⌃⌥⌘ L    │ ⌃⌥⌘ U    │ ⌃⌥⌘ Y    │          │
