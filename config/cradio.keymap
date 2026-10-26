@@ -35,6 +35,24 @@
 
     };
 
+    macros {
+        // Brightness up 20 times. The HID "brightness max" key (C_BRI_MAX)
+        // is ignored by macOS; 20 steps tops out on macOS (16) and on Linux
+        // (5% steps). Used on the Media layer.
+        bri_max: brightness_max {
+            compatible = "zmk,behavior-macro";
+            display-name = "Bright max";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&macro_tap
+                &kp C_BRI_UP &kp C_BRI_UP &kp C_BRI_UP &kp C_BRI_UP &kp C_BRI_UP
+                &kp C_BRI_UP &kp C_BRI_UP &kp C_BRI_UP &kp C_BRI_UP &kp C_BRI_UP
+                &kp C_BRI_UP &kp C_BRI_UP &kp C_BRI_UP &kp C_BRI_UP &kp C_BRI_UP
+                &kp C_BRI_UP &kp C_BRI_UP &kp C_BRI_UP &kp C_BRI_UP &kp C_BRI_UP>;
+        };
+    };
+
     conditional_layers {
         compatible = "zmk,conditional-layers";
         bspc_ret {
@@ -296,15 +314,15 @@
         // Layer 12: Media (hold ESC + RET, either one first)
         // A Mac's top row. M N E I are left/down/up/right as everywhere else:
         // previous track, volume down, volume up, next track. Brightness sits
-        // above the volume keys, mute and play/pause below them, and Y is
-        // Mission Control. Everything else is blocked, so nothing falls
-        // through to the Nav or Symbols layer the thumbs are holding.
+        // above the volume keys (Y: all the way up), mute and play/pause below
+        // them, and J is Mission Control. Everything else is blocked, so
+        // nothing falls through to the Nav or Symbols layer the thumbs hold.
         media_layer {
             display-name = "Media";
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│          │          │          │          │          │   │          │ BRI_DN   │ BRI_UP   │ MISSION  │          │
-            &none      &none      &none      &none      &none          &none      &kp C_BRI_DN &kp C_BRI_UP &kp LC(UP) &none
+        //│          │          │          │          │          │   │ MISSION  │ BRI_DN   │ BRI_UP   │ BRI_MAX  │          │
+            &none      &none      &none      &none      &none          &kp LC(UP) &kp C_BRI_DN &kp C_BRI_UP &bri_max &none
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│          │          │          │          │          │   │ PREV     │ VOL_DN   │ VOL_UP   │ NEXT     │          │
             &none      &none      &none      &none      &none          &kp C_PREV &kp C_VOL_DN &kp C_VOL_UP &kp C_NEXT &none
